@@ -1,18 +1,19 @@
 #!/usr/bin/python3
-# python3 header
+"""determines if all the boxes can be opened"""
 
 
 def canUnlockAll(boxes):
-    # This function checks if all boxes can be unlocked.
+    """determines if all the boxes can be opened"""
+    position = 0
+    unlocked = {}
 
-    opened = [False] * len(boxes)
-    opened[0] = True
-    stack = [key for key in boxes[0]]
-    while stack:
-        key = stack.pop()
-        if not opened[key]:
-            opened[key] = True
-            for new_key in boxes[key]:
-                if new_key < len(boxes) and not opened[new_key]:
-                    stack.append(new_key)
-    return all(opened)
+    for box in boxes:
+        if len(box) == 0 or position == 0:
+            unlocked[position] = "always_unlocked"
+        for key in box:
+            if key < len(boxes) and key != position:
+                unlocked[key] = key
+        if len(unlocked) == len(boxes):
+            return True
+        position += 1
+    return False
