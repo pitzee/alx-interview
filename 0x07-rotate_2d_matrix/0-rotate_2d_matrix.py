@@ -3,18 +3,14 @@
 
 
 def rotate_2d_matrix(matrix):
+    n = len(matrix)
+    x = [[] for _ in range(n)]
 
-    x = [[] for q in range(len(matrix))]
+    for i in range(n):
+        for j in range(n-1, -1, -1):
+            x[i].append(matrix[j][i])
 
-    n = (len(matrix) - 1)
-    m = 0
+    matrix[:] = x
 
-    for i in matrix:
-        for j in i:
-            x[m].append(matrix[n][m])
-            n -= 1
-        n += len(matrix)
-        m += 1
-
-    for z in x:
+    for z in matrix:
         print(z)
